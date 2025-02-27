@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lorem Ipsum</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .module {
+      border: 1px solid #000;
+      background-color: #97f160;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      padding: 10px;
+      max-width: 700px;
+    }
+    .module-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #97f160;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .module-title button {
+      padding: 5px 10px;
+      cursor: pointer;
+      background-color: #97f160;
+      border-radius: 10px;
+      border: 1px solid #000;
+      border-radius: 5px;
+    }
+    .module-content {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #97f160;
+    }
+    .module-input {
+      margin-top: 10px;
+      display: none;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 5px;
+      border-radius: 5px;
+      box-sizing: border-box;
+      background-color: #97f160;
+      border: 1px solid #000;
+      resize: none;
+    }
+    textarea::placeholder {
+      text-align: center;
+      color: #000;
+    }
+
+    h1 {
+      text-align: left;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Lorem Ipsum</h1>
+  <h2>Practica 1 - David Mochales</h2>
+  <div class="module">
+    <div class="module-title">
+      ¿Que es Lorem Ipsum?
+      <button onclick="toggleModule(1)">Mostrar más</button>
+    </div>
+    <div class="module-content" id="module1">
+      <p id="textModule1">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
+    </div>
+    <div class="module-input" id="input1">
+      <textarea id="inputModule1" placeholder="Input del texto..."></textarea>
+    </div>
+  </div>
+
+  <div class="module">
+    <div class="module-title">
+      ¿Por qué lo usamos?
+      <button onclick="toggleModule(2)">Mostrar más</button>
+    </div>
+    <div class="module-content" id="module2">
+      <p id="textModule2">Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).</p>
+    </div>
+    <div class="module-input" id="input2">
+      <textarea id="inputModule2" placeholder="Input del texto..."></textarea>
+    </div>
+  </div>
+
+  <div class="module">
+    <div class="module-title">
+      ¿Donde puedo conseguirlo?
+      <button onclick="toggleModule(3)">Mostrar más</button>
+    </div>
+    <div class="module-content" id="module3">
+      <p id="textModule3">Hay muchas variaciones de los pasajes de Lorem Ipsum disponibles, pero la mayoría sufrió alteraciones en alguna manera, ya sea porque se le agregó humor, o palabras aleatorias que no parecen ni un poco creíbles. Si vas a utilizar un pasaje de Lorem Ipsum, necesitás estar seguro de que no hay nada avergonzante escondido en el medio del texto. Todos los generadores de Lorem Ipsum que se encuentran en Internet tienden a repetir trozos predefinidos cuando sea necesario, haciendo a este el único generador verdadero (válido) en la Internet. Usa un diccionario de mas de 200 palabras provenientes del latín, combinadas con estructuras muy útiles de sentencias, para generar texto de Lorem Ipsum que parezca razonable. Este Lorem Ipsum generado siempre estará libre de repeticiones, humor agregado o palabras no características del lenguaje, etc.</p>
+    </div>
+    <div class="module-input" id="input3">
+      <textarea id="inputModule3" placeholder="Input del texto..."></textarea>
+    </div>
+  </div>
+
+  <script>
+    function toggleModule(moduleId) {
+      const moduleContent = document.getElementById(`module${moduleId}`);
+      const input = document.getElementById(`input${moduleId}`);
+      const button = document.querySelector(`#module${moduleId} + .module-title button`);
+      
+      if (moduleContent.style.display === 'none' || moduleContent.style.display === '') {
+        moduleContent.style.display = 'block';
+        input.style.display = 'block';
+        button.innerText = 'Mostrar menos';
+      } else {
+        moduleContent.style.display = 'none';
+        input.style.display = 'none';
+        button.innerText = 'Mostrar más';
+        saveAndResetText(moduleId);
+      }
+    }
+
+    function saveAndResetText(moduleId) {
+      const inputText = document.getElementById(`inputModule${moduleId}`).value;
+      const moduleText = document.getElementById(`textModule${moduleId}`);
+      if (inputText.trim() !== '') {
+        moduleText.innerText += ` ${inputText}`
+      }
+      document.getElementById(`inputModule${moduleId}`).value = '';
+    }
+
+    document.querySelectorAll('textarea').forEach((textarea) => {
+      textarea.addEventListener('blur', (e) => {
+        const moduleId = e.target.id.replace('inputModule', '');
+        saveAndResetText(moduleId);
+      });
+    });
+  </script>
+
+</body>
+</html>
